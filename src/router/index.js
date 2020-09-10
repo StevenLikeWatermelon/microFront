@@ -1,12 +1,9 @@
-/* eslint-disable*/
-
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // RouterTab 内置路由
 import { RouterTabRoutes } from 'vue-router-tab'
-/* eslint-disable */
+
 import Frame from '../views/Frame.vue'
-/* eslint-disable */
 
 Vue.use(VueRouter)
 
@@ -44,7 +41,7 @@ const routes = [
         }
       }
     ]
-  },
+  }
 ]
 
 const router = new VueRouter({
@@ -52,5 +49,3 @@ const router = new VueRouter({
 })
 
 export default router
-
-/* eslint-disable*/
