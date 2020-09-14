@@ -11,6 +11,8 @@ import 'vue-router-tab/dist/lib/vue-router-tab.css'
 import router from './router'
 import store from './store'
 
+import './icons' // icon
+
 Vue.use(XlViews)
 Vue.use(RouterTab)
 
