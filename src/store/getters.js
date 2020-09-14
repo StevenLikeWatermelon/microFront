@@ -1,15 +1,20 @@
+// 递归获取第一个没有children的数组项目
+const getFisrtItemWithNoChildren = (listArr) => {
+  const firstItem = listArr[0] || {}
+  // 有子项目的话继续往下找
+  if (firstItem.children && firstItem.children.length > 0) {
+    getFisrtItemWithNoChildren(firstItem.children)
+  } else {
+    return firstItem
+  }
+}
+
 const getters = {
-  sidebar: state => state.app.sidebar,
-  size: state => state.app.size,
-  device: state => state.app.device,
-  visitedViews: state => state.tagsView.visitedViews,
-  cachedViews: state => state.tagsView.cachedViews,
+  sysCodeConfig: state => state.menu.sysCodeConfig,
+  menuList: state => state.menu.menuList,
+  homePageConfig: state => getFisrtItemWithNoChildren(state.menu.menuList),
   token: state => state.user.token,
   avatar: state => state.user.avatar,
-  name: state => state.user.name,
-  introduction: state => state.user.introduction,
-  roles: state => state.user.roles,
-  permission_routes: state => state.permission.routes,
-  errorLogs: state => state.errorLog.logs
+  name: state => state.user.name
 }
 export default getters

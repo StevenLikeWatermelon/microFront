@@ -2,7 +2,6 @@
   <div class="login-full-screen">
     <login-view
       title="新联新平台登陆"
-
       :loading="loginLoading"
       :validUsername="validateName"
       :validPassword="validatePassword"
@@ -25,18 +24,14 @@
 </template>
 
 <script>
-import loginView from '@/components/loginView/index.vue'
+import { XlLoginView } from 'xl-views'
 export default {
   components: {
-    loginView
+    loginView: XlLoginView
   },
   data () {
     return {
-      loginLoading: false,
-      loginBackUrl: require('./background.png'),
-      styleObject: {
-        background: `url(${this.loginBackUrl})`
-      }
+      loginLoading: false
     }
   },
   methods: {
@@ -47,8 +42,12 @@ export default {
       return value.length > 5
     },
     successHandle (loginForm) {
-      this.$router.push('/iframe/https%3A%2F%2Fm.hao123.com%2F/Hao123/rt-icon-web')
-      console.log(loginForm)
+      this.loginLoading = true
+      this.$store.dispatch('user/login', loginForm).then(res => {
+        console.log(res, '222')
+      }).finally(() => {
+        this.loginLoading = false
+      })
     },
     failHandle (loginForm) {
       console.log(loginForm)
