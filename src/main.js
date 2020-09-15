@@ -12,13 +12,14 @@ import router from './router'
 import store from './store'
 
 import './icons' // icon
+import './router/permission' // router perssion
 
 Vue.use(XlViews)
 Vue.use(RouterTab)
 
 Vue.config.productionTip = false
 
-new Vue({
+window.App = new Vue({
   router,
   store,
   render: h => h(App)

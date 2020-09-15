@@ -1,6 +1,6 @@
 import { login, logout, getInfo } from '@/api/user'
 
-import { getToken, setToken, removeToken } from '@/assets/js/localStorage'
+import { getToken, setToken, removeToken } from '@/assets/js/storeToken'
 
 const state = {
   token: getToken(),

@@ -25,6 +25,8 @@
 
 <script>
 import { XlLoginView } from 'xl-views'
+import { mapGetters } from 'vuex'
+import { pushPath } from '@/assets/js/utils'
 export default {
   components: {
     loginView: XlLoginView
@@ -34,6 +36,15 @@ export default {
       loginLoading: false
     }
   },
+  computed: {
+    ...mapGetters([
+      'homePageConfig'
+    ]),
+    historyPath () {
+      // 有的需要记住上一次跳转过来的路由
+      return this.$route.query.redirect
+    }
+  },
   methods: {
     validateName (value) {
       return value.length > 4
@@ -41,13 +52,25 @@ export default {
     validatePassword (value) {
       return value.length > 5
     },
-    successHandle (loginForm) {
+    async successHandle (loginForm) {
       this.loginLoading = true
-      this.$store.dispatch('user/login', loginForm).then(res => {
-        console.log(res, '222')
-      }).finally(() => {
+      try {
+        // 先登录
+        await this.$store.dispatch('user/login', loginForm)
+        // 再获取用户信息、菜单、syscode 确保有第一个子项目路由，
+        await this.$store.dispatch('getAllUserInfo')
+        // 最后跳转
         this.loginLoading = false
-      })
+        if (this.historyPath) {
+          // 有历史参数就跳转历史路由 没有就跳转默认路由
+          this.$router.push(decodeURI(this.historyPath))
+        } else {
+          // 三个参数分别为：链接、页签标题、图标
+          pushPath(this.homePageConfig)
+        }
+      } catch (error) {
+        this.loginLoading = false
+      }
     },
     failHandle (loginForm) {
       console.log(loginForm)
