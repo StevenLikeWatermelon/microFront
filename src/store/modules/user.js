@@ -10,19 +10,19 @@ const state = {
 }
 
 const mutations = {
-  SET_TOKEN (state, token) {
+  setToken (state, token) {
     // 本地化存储
     setToken(token)
     state.token = token
   },
-  REMOVE_TOKEN (state) {
+  removeToken (state) {
     removeToken()
     state.token = ''
   },
-  SET_NAME (state, name) {
+  setName (state, name) {
     state.name = name
   },
-  SET_AVATAR (state, avatar) {
+  setAvatar (state, avatar) {
     state.avatar = avatar
   }
 }
@@ -33,7 +33,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ userName: username.trim(), passWord: password, sysId: 102 }).then(res => {
         const token = res.result && res.result.token
-        commit('SET_TOKEN', token)
+        commit('setToken', token)
         resolve(res)
       }).catch(err => {
         reject(err)
@@ -44,8 +44,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo().then(res => {
         const userInfo = res.result || {}
-        commit('SET_NAME', userInfo.name)
-        commit('SET_AVATAR', userInfo.avatar)
+        commit('setName', userInfo.name)
+        commit('setAvatar', userInfo.avatar)
         resolve(userInfo)
       }).catch(err => {
         reject(err)
@@ -55,7 +55,7 @@ const actions = {
   logout ({ commit }) {
     return new Promise((resolve, reject) => {
       logout().then(() => {
-        commit('REMOVE_TOKEN')
+        commit('removeToken')
         resolve()
       }).catch(err => {
         reject(err)

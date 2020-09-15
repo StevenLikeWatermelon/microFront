@@ -8,10 +8,10 @@ const state = {
 }
 
 const mutations = {
-  SET_MENU (state, menuList) {
+  setMenu (state, menuList) {
     state.menuList = menuList
   },
-  SET_SYSY_CODE (state, sysCodeConfig) {
+  setSysCode (state, sysCodeConfig) {
     state.sysCodeConfig = sysCodeConfig
   }
 }
@@ -22,7 +22,7 @@ const actions = {
       getMenu().then(res => {
         console.log(res)
         const menuList = res.result || []
-        commit('SET_MENU', menuList)
+        commit('setMenu', menuList)
         resolve(menuList)
       }).catch(err => {
         reject(err)
@@ -33,7 +33,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       getSysList().then(res => {
         const sysCodeConfig = res.result || []
-        commit('SET_SYSY_CODE', sysCodeConfig)
+        commit('setSysCode', sysCodeConfig)
         resolve(sysCodeConfig)
       }).catch(err => {
         reject(err)
