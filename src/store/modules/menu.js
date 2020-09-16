@@ -20,7 +20,6 @@ const actions = {
   getMenu ({ commit }) {
     return new Promise((resolve, reject) => {
       getMenu().then(res => {
-        console.log(res)
         const menuList = res.result || []
         commit('setMenu', menuList)
         resolve(menuList)

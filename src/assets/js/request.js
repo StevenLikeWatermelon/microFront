@@ -1,7 +1,7 @@
 import { request } from 'xl-utils'
-import { Message, MessageBox } from 'xl-views'
+import { Message } from 'xl-views'
 import { TokenKey } from '@/assets/js/storeToken'
-import store from '@/store/index'
+import { showTokenExpireBox } from '@/assets/js/utils'
 
 const axiosInstance = request({
   TOKEN_KEY: TokenKey,
@@ -23,14 +23,7 @@ const service = (config = {}) => {
 
       // 如果是token失效做统一的路由回到login处理 错误码暂时写死的401，因为后端还没定 后期需要改
       if (err.messageCode === '401') {
-        MessageBox.confirm('您的登录已失效，点击取消可继续停留在当前页面', '确定登出', {
-          confirmButtonText: '登出',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          store.commit('user/removeToken')
-          location.reload()
-        })
+        showTokenExpireBox()
       }
       reject(err)
     })

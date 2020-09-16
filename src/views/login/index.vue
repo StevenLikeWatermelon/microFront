@@ -8,7 +8,6 @@
       usernameErrorTip="用户名至少5位"
       passwordErrorTip="密码至少6位"
       @validate-success="successHandle"
-      @validate-fail="failHandle"
     >
     <!-- <div slot="header">
       <p style="font-size: 32px;color: rgb(103 210 25);padding-bottom: 20px;">新联新平台登陆2</p>
@@ -27,6 +26,7 @@
 import { XlLoginView } from 'xl-views'
 import { mapGetters } from 'vuex'
 import { pushPath } from '@/assets/js/utils'
+import store from '@/store'
 export default {
   components: {
     loginView: XlLoginView
@@ -61,9 +61,16 @@ export default {
         await this.$store.dispatch('getAllUserInfo')
         // 最后跳转
         this.loginLoading = false
+        // 有历史参数就跳转历史路由 没有就跳转默认路由
         if (this.historyPath) {
-          // 有历史参数就跳转历史路由 没有就跳转默认路由
-          this.$router.push(decodeURI(this.historyPath))
+          // 这里带来的token还是旧的 要手动更新下
+          const allquery = this.historyPath.split('%26')
+          const tokenQueryArr = allquery.filter(item => item.includes('token%3D'))
+          const tokenQuery = tokenQueryArr[0] || ''
+          const oldToken = tokenQuery.split('%3D')[1] || ''
+          const pathWithNewToken = this.historyPath.replace(oldToken, store.getters.token)
+          // 开始跳转
+          this.$router.push(decodeURI(pathWithNewToken))
         } else {
           // 三个参数分别为：链接、页签标题、图标
           pushPath(this.homePageConfig)
@@ -71,9 +78,6 @@ export default {
       } catch (error) {
         this.loginLoading = false
       }
-    },
-    failHandle (loginForm) {
-      console.log(loginForm)
     }
   }
 }

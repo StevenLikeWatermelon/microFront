@@ -60,7 +60,6 @@ router.beforeEach(async (to, from, next) => {
       next()
     } else {
       // 其余的统一跳转到登录页面 但是home不需要带redirect
-      console.log(to.path)
       goToLogin(to, next)
       NProgress.done()
     }
