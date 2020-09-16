@@ -1,6 +1,8 @@
 <template>
   <xl-container>
-    <xl-header>Header</xl-header>
+    <xl-header>
+      <header-content></header-content>
+    </xl-header>
     <xl-container>
       <xl-aside>
         <xl-menu :default-active="currentIndex">
@@ -22,6 +24,7 @@
 import { mapGetters } from 'vuex'
 import { eventTypes } from 'xl-utils'
 import recursionMenu from '@/components/recursionMenu/index'
+import headerContent from '@/components/headerContent/index'
 import { showTokenExpireBox } from '@/assets/js/utils'
 export default {
   methods: {
@@ -43,7 +46,7 @@ export default {
             showTokenExpireBox()
             break
           case eventTypes.newTab:
-            console.log('newTab')
+
             break
 
           default:
@@ -53,7 +56,8 @@ export default {
     }
   },
   components: {
-    recursionMenu
+    recursionMenu,
+    headerContent
   },
   computed: {
     ...mapGetters(['firstIframeId', 'menuListWithPre'])
@@ -83,7 +87,7 @@ export default {
 
 <style>
 .el-header {
-  background-color: #b3c0d1;
+  background-color: #2f8ef1;
   color: #333;
   line-height: 60px;
 }

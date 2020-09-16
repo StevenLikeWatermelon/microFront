@@ -41,12 +41,10 @@ router.beforeEach(async (to, from, next) => {
         goToLogin(to, next)
         NProgress.done()
       }
-      console.log('has-get-new-info-data')
     }
     // 以下是确保了已经有了菜单信息、用户信息以及第一个url之后的逻辑
     if (to.path === '/login' || to.path === homePath) {
       // 如果登陆了还去登陆页或者vueRouterTabs的默认首页就直接跳转到第一个iframe
-      console.log(store.getters.homePageConfig)
       const fullPath = makePath(store.getters.homePageConfig)
       next({ path: fullPath })
       NProgress.done()
