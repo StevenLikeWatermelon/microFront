@@ -18,10 +18,8 @@
         :index="list.id"
         @click.native="pushPath(list)"
       >
-        <template slot="title">
-          <i :class="list.icon"></i>
-          <span>{{list.resName}}</span>
-        </template>
+        <i :class="list.icon"></i>
+        <span>{{list.resName}}</span>
       </xl-menu-item>
     </template>
   </div>
