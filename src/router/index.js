@@ -33,7 +33,14 @@ const routes = [
     // this generates a separate chunk (login.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "login" */ '../views/login/index.vue')
-  }
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import(/* webpackChunkName: "login" */ '../views/error/404.vue')
+  },
+  // 404 page must be placed at the end !!!
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const router = new VueRouter({
