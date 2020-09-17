@@ -1,7 +1,7 @@
 import router from '@/router'
 import store from '@/store'
 import { MessageBox, Message } from 'xl-views'
-
+import { getUrlParams } from 'xl-utils'
 // 组装url
 export const makePath = (pathConfig = {}) => {
   const firstIframeUrl = pathConfig.sysURLWithPre || ''
@@ -13,6 +13,12 @@ export const makePath = (pathConfig = {}) => {
 }
 // 统一处理push tabs逻辑
 export const pushPath = (pathConfig = {}) => {
+  const query = getUrlParams()
+  const currentId = query?.id
+  // 当前路由已经存在了就不要操作了
+  if (currentId === pathConfig.id) {
+    return
+  }
   const fullPath = makePath(pathConfig)
   router.push(fullPath)
 }
