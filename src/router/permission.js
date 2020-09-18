@@ -9,7 +9,7 @@ import { makePath } from '@/assets/js/utils'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login'] // 不用检测权限白名单
-const homePath = '/home'
+const homePath = '/home' // 预留的不需要带跳转信息的
 // 跳转到login逻辑
 const goToLogin = (to, next) => {
   // home不处理

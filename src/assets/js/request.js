@@ -8,7 +8,7 @@ const axiosInstance = request({
   baseUrl: process.env.VUE_APP_BASE_API
 })
 
-// 二次封装
+// 二次封装 拦截所有报错给出提示
 const service = (config = {}) => {
   return new Promise((resolve, reject) => {
     axiosInstance(config).then(res => {
