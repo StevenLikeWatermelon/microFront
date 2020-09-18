@@ -4,13 +4,14 @@ import { MessageBox, Message } from 'xl-views'
 import { getUrlParams } from 'xl-utils'
 // 组装url
 export const makePath = (pathConfig = {}) => {
-  const firstIframeUrl = pathConfig.sysURLWithPre || ''
-  const firstIframeTitle = pathConfig.resName || ''
-  const firstIframeIcon = pathConfig.icon || ''
-  const firstIframeId = pathConfig.id || ''
-  const fullUrl = `/iframe/${encodeURIComponent(firstIframeUrl)}/${firstIframeTitle}/${firstIframeIcon}?id=${firstIframeId}`
+  const iframeUrl = pathConfig.sysURLWithPre || ''
+  const iframeTitle = pathConfig.resName || ''
+  const iframeIcon = pathConfig.icon || ''
+  const iframeId = pathConfig.id || ''
+  const fullUrl = `/iframe/${encodeURIComponent(iframeUrl)}/${iframeTitle}/${iframeIcon}?id=${iframeId}`
   return fullUrl
 }
+
 // 统一处理push tabs逻辑
 export const pushPath = (pathConfig = {}) => {
   const query = getUrlParams()
