@@ -1,4 +1,4 @@
-export const TokenKey = 'Admin-Token'
+import { TokenKey } from '@/assets/js/global'
 
 export function getToken () {
   return window.localStorage.getItem(TokenKey)

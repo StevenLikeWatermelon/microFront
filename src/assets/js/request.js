@@ -1,6 +1,6 @@
 import { request } from 'xl-utils'
 import { Message } from 'xl-views'
-import { TokenKey } from '@/assets/js/storeToken'
+import { TokenKey } from '@/assets/js/global'
 import { showTokenExpireBox } from '@/assets/js/utils'
 
 const axiosInstance = request({
@@ -29,4 +29,5 @@ const service = (config = {}) => {
     })
   })
 }
+
 export default service

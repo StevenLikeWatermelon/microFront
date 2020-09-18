@@ -145,6 +145,9 @@ export default {
     z-index: 999;
     background: #fff;
 }
+.el-main {
+  padding: 0;
+}
 </style>
 <style lang="scss" scoped>
 .toggle-icon {
