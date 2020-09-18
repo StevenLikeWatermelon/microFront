@@ -11,6 +11,7 @@ const routes = [
   {
     path: '/',
     component: Frame,
+    redirect: '/home',
     // 子路由里配置需要通过页签打开的页面路由
     children: [
       // 引入 RouterTab 内置路由以支持 Iframe 页签
